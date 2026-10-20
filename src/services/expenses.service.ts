@@ -23,7 +23,7 @@ export async function createExpense(
   return result.rows[0];
 }
 
-export async function deleteExpense (id: string) {
+export async function deleteExpense (id: number) {
   const result = await pool.query("DELETE FROM expenses WHERE id = $1", [id]);
   return result.rowCount;
 }

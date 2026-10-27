@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from "express";
 import "dotenv/config";
 import pg from "pg";
 import express from "express";
@@ -21,6 +22,10 @@ app.get("/health/db", async (req, res) => {
 app.post("/expenses", createExpenseController);
 app.get("/expenses", listExpensesController);
 app.delete("/expenses/:id", deleteExpenseController);
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log(err);
+  res.status(500).json({ error: "erro interno no servidor" });
+});
 app.listen(3000, () => {
   console.log("Servidor rodando em http://localhost:3000");
 });
